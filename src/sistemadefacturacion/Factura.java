@@ -1,15 +1,14 @@
 package sistemadefacturacion;
 
 import custom.date.Date;
+import java.util.ArrayList;
 
 public class Factura {
-    public static final int INITIAL_LENGTH = 10;
     private String clientName;
     private long nit;
     private int number;
     private int day, month, year;
-    private Item[] items;
-    private int count;
+    private final ArrayList<Item> items;
 
     public Factura(int number, long nit, String clientName, int day, int month, int year) {
         this.clientName = clientName;
@@ -19,23 +18,11 @@ public class Factura {
         this.month = month;
         this.year = year;
 
-        this.items = new Item[INITIAL_LENGTH];
-        this.count = 0;
+        items = new ArrayList<>();
     }
 
     public void agregarItem(int number, String description, double price) {
-        if (items.length == count) {
-            upgrade();
-        }
-
-        items[count++] = new Item(number, description, price);
-    }
-
-    private void upgrade() {
-        Item[] newItems = new Item[items.length + INITIAL_LENGTH];
-        System.arraycopy(items, 0, newItems, 0, items.length);
-
-        items = newItems;
+        items.add(new Item(number, description, price));
     }
 
     public String getClientName() {

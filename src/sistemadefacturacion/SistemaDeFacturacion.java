@@ -1,41 +1,28 @@
 package sistemadefacturacion;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class SistemaDeFacturacion implements Iterable<Factura> {
-    public static final int INITIAL_LENGTH = 10;
-    private Factura[] items;
-    private int count;
+    private final ArrayList<Factura> items;
 
     public SistemaDeFacturacion() {
-        items = new Factura[INITIAL_LENGTH];
-        count = 0;
+        items = new ArrayList<>();
     }
 
     public Factura crearFactura(int number, long nit, String clientName, int day, int month, int year) {
-        if (items.length == count) {
-            upgrade();
-        }
-
         Factura factura = new Factura(number, nit, clientName, day, month, year);
-        items[count++] = factura;
+        items.add(factura);
 
         return factura;
     }
 
-    private void upgrade() {
-        Factura[] newItems = new Factura[items.length + INITIAL_LENGTH];
-        System.arraycopy(items, 0, newItems, 0, items.length);
-
-        items = newItems;
-    }
-
     public Factura getItem(int index) {
-        return items[index];
+        return items.get(index);
     }
 
     public int getCount() {
-        return count;
+        return items.size();
     }
 
     @Override
