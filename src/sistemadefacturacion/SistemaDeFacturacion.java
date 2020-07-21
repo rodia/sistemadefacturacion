@@ -17,35 +17,8 @@ public class SistemaDeFacturacion implements Iterable<Factura> {
         return factura;
     }
 
-    public Factura getItem(int index) {
-        return items.get(index);
-    }
-
-    public int getCount() {
-        return items.size();
-    }
-
     @Override
     public Iterator<Factura> iterator() {
-        return new ListIterator(this);
-    }
-}
-
-final class ListIterator implements Iterator<Factura> {
-    private final SistemaDeFacturacion list;
-    private int index;
-
-    public ListIterator(SistemaDeFacturacion list) {
-        this.list = list;
-    }
-
-    @Override
-    public boolean hasNext() {
-        return index < list.getCount();
-    }
-
-    @Override
-    public Factura next() {
-        return list.getItem(index++);
+        return this.items.iterator();
     }
 }
